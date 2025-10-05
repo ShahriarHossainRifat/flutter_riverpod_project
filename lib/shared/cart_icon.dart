@@ -14,12 +14,12 @@ class CartIcon extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return const CartScreen();
+                  return CartScreen();
                 },
               ),
             );
           },
-          icon: const Icon(Icons.shopping_bag_outlined),
+          icon: Icon(Icons.shopping_bag_outlined),
         ),
         Positioned(
           top: 5,

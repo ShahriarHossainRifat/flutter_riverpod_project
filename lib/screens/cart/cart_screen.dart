@@ -14,13 +14,13 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Cart'),
+        title: Text('Your Cart'),
         centerTitle: true,
         // actions: [],
       ),
       body: Container(
-        padding: const EdgeInsets.all(30),
-        child: const Column(
+        padding: EdgeInsets.all(30),
+        child: Column(
           children: [
             Column(
               children: [], // output cart products here

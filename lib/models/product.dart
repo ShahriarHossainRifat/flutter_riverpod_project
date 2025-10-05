@@ -1,5 +1,5 @@
 class Product {
-  const Product({
+  Product({
     required this.id,
     required this.title,
     required this.price,

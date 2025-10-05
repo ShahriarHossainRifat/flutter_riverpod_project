@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/products_provider.dart';
 import '../../shared/cart_icon.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final allProducts = ref.watch(productsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Garage Sale Products'),
-        actions: const [CartIcon()],
+        title: Text('Garage Sale Products'),
+        actions: [CartIcon()],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: GridView.builder(
-          itemCount: 8,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          itemCount: allProducts.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
@@ -23,8 +26,22 @@ class HomeScreen extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               color: Colors.blueGrey.withValues(alpha: 0.05),
+              child: Column(
+                children: [
+                  Image.asset(allProducts[index].image, height: 100),
+                  Text(
+                    allProducts[index].title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    '\$${allProducts[index].price}',
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
             );
           },
         ),
