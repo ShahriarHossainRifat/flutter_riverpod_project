@@ -10,7 +10,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allProducts = ref.watch(productsProvider);
-    final cartProducts = ref.watch(cartNotifierProvider);
+    final cartProducts = ref.watch(cartProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Garage Sale Products'),
@@ -55,13 +55,20 @@ class HomeScreen extends ConsumerWidget {
                   ),
 
                   if (cartProducts.contains(allProducts[index]))
-                    ElevatedButton(onPressed: () {}, child: Text('Remove')),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref
+                            .read(cartProvider.notifier)
+                            .removeProduct(allProducts[index]);
+                      },
+                      child: Text('Remove'),
+                    ),
 
                   if (!cartProducts.contains(allProducts[index]))
                     ElevatedButton(
                       onPressed: () {
                         ref
-                            .read(cartNotifierProvider.notifier)
+                            .read(cartProvider.notifier)
                             .addProduct(allProducts[index]);
                       },
                       child: Text('Add'),
